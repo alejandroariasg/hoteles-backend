@@ -16,4 +16,10 @@ RUN composer install --no-dev --optimize-autoloader
 
 RUN chown -R www-data:www-data storage bootstrap/cache
 
+RUN a2enmod rewrite
+
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
+
+RUN chown -R www-data:www-data /var/www/html
+
 EXPOSE 80
